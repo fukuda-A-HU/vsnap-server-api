@@ -39,3 +39,9 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+# nameとkeyを指定して、ユーザーが存在するか確認
+@app.get("/users/{name}/{key}")
+def read_user(name: str, key: str, db: Session = Depends(get_db)):
+    user = crud.get_user_by_name_and_key(name, key, db)
+    return user

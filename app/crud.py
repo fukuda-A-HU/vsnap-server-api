@@ -26,3 +26,6 @@ def delete_user(id: int, db: Session):
     db.delete(db_user)
     db.commit()
     return db_user
+
+def get_user_by_name_and_key(name: str, key: str, db: Session):
+    return db.query(models.User).filter(models.User.name == name, models.User.key == key).first()
