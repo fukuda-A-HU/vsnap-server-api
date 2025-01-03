@@ -39,3 +39,9 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
+
+# データベースの初期化
+@app.get("/init/")
+def init_db(db: Session = Depends(get_db)):
+    models.Base.metadata.create_all(bind=engine)
+    return {"message": "Database initialized"}

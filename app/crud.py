@@ -5,7 +5,7 @@ def get_user(id: int, db_session: Session):
     return db_session.query(models.User).filter(models.User.id == id).first()
 
 def create_user(user: schemas.User, db: Session):
-    db_user = models.User(name=user.name, email=user.email)
+    db_user = models.User(name=user.name, key=user.key)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
@@ -14,7 +14,7 @@ def create_user(user: schemas.User, db: Session):
 def update_user(id: int, user: schemas.User, db: Session):
     db_user = get_user(id,db)
     db_user.name = user.name
-    db_user.email = user.email
+    db_user.key = user.key
     db.commit()
     db.refresh(db_user)
     return db_user

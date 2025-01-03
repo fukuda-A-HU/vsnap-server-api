@@ -1,0 +1,2 @@
+## Herokuへのデプロイ
+git push heroku
